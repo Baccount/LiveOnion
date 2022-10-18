@@ -1,4 +1,4 @@
-from tools import s_input
+from tools import s_input, query_input
 from linksClass import Links
 
 def main():
