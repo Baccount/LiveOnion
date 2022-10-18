@@ -1,4 +1,5 @@
 from tools import s_input
+from linksClass import Links
 
 def main():
     ''' Main function '''
@@ -8,7 +9,9 @@ def main():
     query = query_input()
     # build the search url
     url = choice + query
-    
+    # link class contains the links from the search results
+    link = Links(url)
+    print(link.get_links())
 
 
 
