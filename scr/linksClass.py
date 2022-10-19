@@ -5,13 +5,21 @@ import requests
 import socks
 from bs4 import BeautifulSoup
 
+AHMAI = (
+    "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/search/?q="
+)
+DUCKDUCKGO = (
+    "https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/?hps=1&q="
+)
+
 
 class Links:
     """Class that downloads the links from from the search results"""
 
-    def __init__(self, url):
-        self.url = url
+    def __init__(self):
         self.links = []
+        self.query = ""
+        self.engine = ""
 
     def get_links(self):
         """Downloads the links from the search results"""
@@ -48,3 +56,28 @@ class Links:
         self.links = [link for link in self.links if not re.search(r"adinfo", link)]
         # print the onion links
         return self.links
+
+    def save_links(self):
+        """Saves the links to a file using sqlite3 the search query as the table name"""
+        import sqlite3
+
+        # create a connection to the database
+        conn = sqlite3.connect("links.db")
+        # create a cursor
+        c = conn.cursor()
+        # create a table with the search query as the table name
+        pass
+
+    def set_engine(self):
+        """Returns users search engine choice"""
+        # dark engine search engines
+        print("1. Ahmia\n2. DuckDuckGo")
+        choice = input(": ")
+        if choice == "1":
+            self.engine = AHMAI
+        elif choice == "2":
+            self.engine = DUCKDUCKGO
+
+    def query_input(self):
+        """Sets users search query"""
+        self.query = input("Search: ")

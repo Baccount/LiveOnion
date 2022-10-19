@@ -1,5 +1,4 @@
 from linksClass import Links
-from tools import query_input, s_input
 
 
 def main():
