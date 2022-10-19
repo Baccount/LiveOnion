@@ -7,8 +7,7 @@ def main():
     link.set_engine()
     link.set_query()
     link.get_links()
-    for link in link.links:
-        print(link)
+    link.save_links()
 
 if __name__ == "__main__":
     main()

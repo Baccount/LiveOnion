@@ -4,6 +4,7 @@ import socket
 import requests
 import socks
 from bs4 import BeautifulSoup
+import sqlite3
 
 AHMAI = (
     "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/search/?q="
@@ -59,8 +60,18 @@ class Links:
 
 
 
-
-
+    def save_links(self):
+                # save links to sqlite database using the query as the table name and the links as the columns
+        try:
+            conn = sqlite3.connect('links.db')
+            c = conn.cursor()
+            c.execute('CREATE TABLE IF NOT EXISTS {0} (link text)'.format(self.query))
+            for link in self.links:
+                c.execute('INSERT INTO {0} VALUES (?)'.format(self.query), (link,))
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            print(e + "Error saving links to database")
 
 
 
