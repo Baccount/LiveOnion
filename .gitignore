@@ -1,2 +1,5 @@
 scr/__pycache__/tools.cpython-310.pyc
 scr/__pycache__/linksClass.cpython-310.pyc
+.trunk/trunk.yaml
+.trunk/config/.flake8
+.trunk/config/.isort.cfg
