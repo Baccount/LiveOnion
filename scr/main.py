@@ -3,18 +3,12 @@ from linksClass import Links
 
 def main():
     """Main function"""
-    # get the users search engine choice
-    choice = s_input()
-    # get the users search query
-    query = query_input()
-    # build the search url
-    url = choice + query
-    # link class contains the links from the search results
-    link = Links(url)
-    links = link.get_links()
-    for link in links:
-        print(link + "\n")
-
+    link = Links()
+    link.set_engine()
+    link.set_query()
+    link.get_links()
+    for link in link.links:
+        print(link)
 
 if __name__ == "__main__":
     main()

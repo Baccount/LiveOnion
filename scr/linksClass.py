@@ -37,7 +37,7 @@ class Links:
 
         # Using requests package to read in the Hidden Wiki Onion Website on the Darknet
 
-        res = requests.get(self.url)
+        res = requests.get(self.engine + self.query)
 
         # Using beautifulsoup to get the website content into a nice format
 
@@ -57,16 +57,19 @@ class Links:
         # print the onion links
         return self.links
 
-    def save_links(self):
-        """Saves the links to a file using sqlite3 the search query as the table name"""
-        import sqlite3
 
-        # create a connection to the database
-        conn = sqlite3.connect("links.db")
-        # create a cursor
-        c = conn.cursor()
-        # create a table with the search query as the table name
-        pass
+
+
+
+
+
+
+
+
+
+
+
+
 
     def set_engine(self):
         """Returns users search engine choice"""
@@ -78,6 +81,8 @@ class Links:
         elif choice == "2":
             self.engine = DUCKDUCKGO
 
-    def query_input(self):
+    def set_query(self):
         """Sets users search query"""
         self.query = input("Search: ")
+
+
