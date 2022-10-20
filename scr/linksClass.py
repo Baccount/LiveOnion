@@ -1,10 +1,10 @@
 import re
 import socket
+import sqlite3
 
 import requests
 import socks
 from bs4 import BeautifulSoup
-import sqlite3
 
 AHMAI = (
     "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/search/?q="
@@ -40,8 +40,6 @@ class Links:
 
         res = requests.get(self.engine + self.query)
 
-        # Using beautifulsoup to get the website content into a nice format
-
         soup = BeautifulSoup(res.content, "html.parser")
 
         # Getting all links out of the soup and deleting None's
@@ -58,51 +56,30 @@ class Links:
         # print the onion links
         return self.links
 
-
-
     def save_links(self):
-                # save links to sqlite database using the query as the table name and the links as the columns
+        # save links to sqlite database using the query as the table name and the links as the columns
         try:
-            conn = sqlite3.connect('links.db')
+            conn = sqlite3.connect("links.db")
             c = conn.cursor()
-            c.execute('CREATE TABLE IF NOT EXISTS {0} (link text)'.format(self.query))
+            c.execute("CREATE TABLE IF NOT EXISTS {0} (link text)".format(self.query))
             for link in self.links:
-                c.execute('INSERT INTO {0} VALUES (?)'.format(self.query), (link,))
+                c.execute("INSERT INTO {0} VALUES (?)".format(self.query), (link,))
             conn.commit()
             conn.close()
         except Exception as e:
             print(e + "Error saving links to database")
 
-
-
-
-
     def read_links(self):
         # read links from sqlite database using the query as the table name
-        conn = sqlite3.connect('links.db')
+        conn = sqlite3.connect("links.db")
         c = conn.cursor()
-        c.execute('SELECT * FROM {0}'.format(self.query))
+        c.execute("SELECT * FROM {0}".format(self.query))
         links = c.fetchall()
         conn.close()
         return links
 
-
-
-
-
-
-
-
-
-
     def __str__(self):
         return str(self.links)
-
-
-
-
-
-
 
     def set_engine(self):
         """Returns users search engine choice"""
@@ -117,7 +94,6 @@ class Links:
     def set_query(self):
         """Sets users search query"""
         self.query = input("Search: ")
-
 
     def print_links(self):
         """Prints the links"""
