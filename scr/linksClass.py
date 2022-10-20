@@ -77,6 +77,28 @@ class Links:
 
 
 
+    def read_links(self):
+        # read links from sqlite database using the query as the table name
+        conn = sqlite3.connect('links.db')
+        c = conn.cursor()
+        c.execute('SELECT * FROM {0}'.format(self.query))
+        links = c.fetchall()
+        conn.close()
+        return links
+
+
+
+
+
+
+
+
+
+
+    def __str__(self):
+        return str(self.links)
+
+
 
 
 
@@ -97,3 +119,7 @@ class Links:
         self.query = input("Search: ")
 
 
+    def print_links(self):
+        """Prints the links"""
+        for link in self.links:
+            print(link)
