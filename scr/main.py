@@ -24,7 +24,7 @@ def ask_user():
         elif choice == "4":
             link.print_links()
         elif choice == "5":
-            link.read_links()
+            print(link.read_links())
         elif choice == "6":
             exit()
 
